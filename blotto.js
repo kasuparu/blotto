@@ -95,13 +95,14 @@ Blotto.play = function (strategies) {
  * @returns {number[]}
  */
 Blotto.tournamentRoundPlay = function (strategies) {
-    var results = Array.apply(null, new Array(Blotto.comboCount)).map(Number.prototype.valueOf, 0);
+    var length = strategies.length;
+    var results = Array.apply(null, new Array(length)).map(Number.prototype.valueOf, 0);
     var first;
     var second;
     var roundResult = [0, 0];
 
-    for (first = 0; first < Blotto.comboCount-1; first++) {
-        for (second = first+1; second < Blotto.comboCount; second++) {
+    for (first = 0; first < length-1; first++) {
+        for (second = first+1; second < length; second++) {
             roundResult = Blotto.play([strategies[first], strategies[second]]);
             //console.log(JSON.stringify([strategies[first], strategies[second]]) + ' ' + JSON.stringify(roundResult));
             results[first] += roundResult[0];
@@ -210,10 +211,15 @@ process.on('SIGINT', function() {
     process.exit();
 });*/
 
-//var combos = Array.apply(null, new Array(Blotto.comboCount)).map(Blotto.generateRandomCombo, 0);
+//var combos = [
+//    [7, 12, 11, 7, 13, 14, 15, 11, 10],
+//    [10, 9, 9, 9, 12, 9, 11, 16, 15],
+//    [8, 9, 11, 10, 15, 7, 16, 15, 9],
+//    [12, 11, 11, 11, 11, 11, 11, 11, 11]
+//];
 //var roundPlayResults = Blotto.tournamentRoundPlay(combos);
-//var roundPlayBest = Blotto.selectBestN(combos, roundPlayResults);
-
+//var roundPlayBest = Blotto.selectBestN(combos, roundPlayResults, {});
+//
 //console.log("\n" + JSON.stringify(roundPlayResults) + "\n");
 //console.log(JSON.stringify(roundPlayBest) + "\n");
 
