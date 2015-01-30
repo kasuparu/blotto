@@ -34,6 +34,13 @@ Blotto.random = function () {
     return ~~(Math.random() * Blotto.maxRandom);
 };
 
+//+ Jonas Raoni Soares Silva
+//@ http://jsfromhell.com/array/shuffle [v1.0]
+Blotto.shuffle = function (o){ //v1.0
+    for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
+
 /**
  * @returns {number[]}
  */
@@ -57,7 +64,7 @@ Blotto.generateRandomCombo = function () {
         //console.log(++attempts + ' ' +JSON.stringify(result));
     } while (remainder < 0);
 
-    return result;
+    return Blotto.shuffle(result);
 };
 
 /**
