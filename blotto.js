@@ -120,6 +120,15 @@ Array.max = function(array){
     return Math.max.apply(Math, array);
 };
 
+//http://stackoverflow.com/questions/9229645/remove-duplicates-from-javascript-array
+Blotto.uniqBy = function (a, key) {
+    var seen = {};
+    return a.filter(function(item) {
+        var k = key(item);
+        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+    })
+};
+
 /**
  * @param {number[][]} strategies
  * @param {number[]} results
@@ -148,6 +157,9 @@ Blotto.selectBestN = function (strategies, results, indexObject) {
             }
         }
     }
+
+    best = Blotto.uniqBy(best, JSON.stringify);
+    bestResults = Blotto.uniqBy(bestResults, JSON.stringify);
 
     if (typeof indexObject === 'object') {
         indexObject.bestResults = bestResults;
