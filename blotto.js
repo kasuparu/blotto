@@ -9,15 +9,17 @@ var filename = 'best.json';
 var Blotto = {
     soldiers: 100,
     fields: 9,
-    comboCount: 1000,
+    comboCount: 20000,
     tournamentRounds: 10,
-    bestN: 10,
+    bestN: 500,
     roundPlayBest: []
 };
 
+console.log('games in round: ' + (Blotto.comboCount*(Blotto.comboCount-1)/2));
+
 if (fs.existsSync(filename)) {
     Blotto.roundPlayBest = JSON.parse(fs.readFileSync('best.json', 'utf8'));
-    console.log('loaded! ' + JSON.stringify(Blotto.roundPlayBest));
+    console.log('loaded! '/* + JSON.stringify(Blotto.roundPlayBest)*/);
 }
 
 /**
@@ -114,6 +116,7 @@ Array.max = function(array){
 /**
  * @param {number[][]} strategies
  * @param {number[]} results
+ * @param {object} indexObject
  * @returns {number[]}
  */
 Blotto.selectBestN = function (strategies, results, indexObject) {
